@@ -1,4 +1,4 @@
-package com.webcontrol.platzi.ui
+package com.webcontrol.platzi.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -5,5 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.PlatziProducts" parent="Base.Theme.PlatziProducts" />
+    <style name="Theme.PlatziProducts" parent="Base.Theme.PlatziProducts">
+        <item name="android:windowBackground">@drawable/app_splash_screen</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
 </resources>
