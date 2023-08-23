@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/recoveryFragment">
+
+    <fragment
+        android:id="@+id/recoveryFragment"
+        android:name="com.webcontrol.platzi.ui.view.ProductsFragment"
+        android:label="fragment_recovery"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_recoveryFragment_to_recoveryConfirmFragment"
+            app:destination="@id/recoveryConfirmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recoveryConfirmFragment"
+        android:name="com.webcontrol.platzi.ui.view.ProductDetailFragment"
+        android:label="fragment_recovery_confirm"
+        tools:layout="@layout/fragment_product_detail" />
+</navigation>
