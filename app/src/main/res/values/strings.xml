@@ -12,4 +12,8 @@
         <item>Precio: más bajo</item>
         <item>Precio: más alto</item>
     </string-array>
+
+    <!-- PLATZI API-->
+    <string name="url_platzi">https://api.escuelajs.co</string>
+
 </resources>
