@@ -3,12 +3,17 @@ package com.webcontrol.platzi.di
 import android.content.Context
 import com.webcontrol.platzi.R
 import com.webcontrol.platzi.data.network.MainClient
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 object ServerModule {
 
     @Singleton
@@ -22,7 +27,7 @@ object ServerModule {
 
     @Singleton
     @Provides
-    fun provideLoginApiClient(retrofit: Retrofit): MainClient {
+    fun provideMainClient(retrofit: Retrofit): MainClient {
         return retrofit.create(MainClient::class.java)
     }
 }
