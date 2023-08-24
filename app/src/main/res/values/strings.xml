@@ -3,4 +3,12 @@
     <string name="txt_product_title">Productos</string>
     <string name="txt_search_product_hint">Buscar Producto</string>
     <string name="text_search_product_hint">Buscar Producto</string>
+
+
+    <!-- FOR SPINNER OPTIONS-->
+
+    <string-array name="spinner_options">
+        <item>Precio: más bajo</item>
+        <item>Precio: más alto</item>
+    </string-array>
 </resources>

@@ -43,10 +43,37 @@
                 app:layout_behavior="@string/searchbar_scrolling_view_behavior"
                 tools:ignore="PrivateResource">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/d_104">
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/d_72">
+
+                    <LinearLayout
+                        android:id="@+id/optionContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="end">
+
+                        <TextView
+                            android:id="@+id/textSortLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:text="Ordenar por:"
+                            android:textSize="16sp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerSort"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:backgroundTint="@color/colorSecondary"
+                            style="@style/mySpinnerItemStyle"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvProducts"
@@ -55,14 +82,13 @@
                         android:background="@color/colorPrimary" />
 
                     <ProgressBar
+                        android:id="@+id/progressBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
                         android:indeterminate="true"
-                        android:indeterminateTint="@color/colorSecondary"
-                        android:visibility="visible" />
-                </RelativeLayout>
+                        android:indeterminateTint="@color/colorSecondary" />
+                </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 
             <com.google.android.material.appbar.AppBarLayout

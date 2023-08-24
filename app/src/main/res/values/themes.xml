@@ -11,4 +11,8 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
 </resources>
