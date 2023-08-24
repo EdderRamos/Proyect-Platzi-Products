@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shape_stroke_width">8px</dimen>
+    <dimen name="shape_size_width">208px</dimen>
+    <dimen name="shape_size_height">208px</dimen>
+    <dimen name="shape_size_widthx2">308px</dimen>
+    <dimen name="shape_size_heightx2">308px</dimen>
+    <dimen name="d_2">2dp</dimen>
+    <dimen name="d_4">4dp</dimen>
+    <dimen name="d_8">8dp</dimen>
+    <dimen name="d_12">12dp</dimen>
+    <dimen name="d_16">16dp</dimen>
+    <dimen name="d_24">24dp</dimen>
+    <dimen name="d_32">32dp</dimen>
+    <dimen name="d_40">40dp</dimen>
+    <dimen name="d_48">48dp</dimen>
+    <dimen name="d_56">56dp</dimen>
+    <dimen name="d_64">64dp</dimen>
+    <dimen name="d_72">72dp</dimen>
+    <dimen name="d_80">80dp</dimen>
+    <dimen name="d_88">88dp</dimen>
+    <dimen name="d_96">96dp</dimen>
+    <dimen name="d_104">104dp</dimen>
+    <dimen name="d_112">112dp</dimen>
+    <dimen name="d_120">120dp</dimen>
+    <dimen name="d_128">128dp</dimen>
+    <dimen name="d_254">254dp</dimen>
+    <dimen name="d_512">512dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

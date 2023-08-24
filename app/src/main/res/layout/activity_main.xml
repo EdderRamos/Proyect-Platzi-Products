@@ -7,12 +7,23 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.view.MainActivity">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost = "true"
-        app:navGraph = "@navigation/nav_graph"/>
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:navGraph="@navigation/nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

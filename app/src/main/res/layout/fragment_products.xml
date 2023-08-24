@@ -1,9 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".ui.view.ProductsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</FrameLayout>
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:paddingHorizontal="@dimen/d_24"
+        android:paddingVertical="@dimen/d_4"
+        tools:context=".ui.view.ProductsFragment">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_2"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingTop="@dimen/d_8"
+            android:text="@string/txt_product_title"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/d_12"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                app:layout_behavior="@string/searchbar_scrolling_view_behavior"
+                tools:ignore="PrivateResource">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/d_104">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvProducts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary" />
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/colorSecondary"
+                        android:visibility="visible" />
+                </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_search_product_hint" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.google.android.material.search.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_search_product_hint"
+                app:layout_anchor="@id/search_bar">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSearchProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary" />
+            </com.google.android.material.search.SearchView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
