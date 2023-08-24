@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
     @SerializedName("category")
-    val category: Category,
+    val category: CategoryResponse,
     @SerializedName("creationAt")
     val creationAt: String,
     @SerializedName("description")
@@ -21,7 +21,8 @@ data class ProductResponse(
     @SerializedName("updatedAt")
     val updatedAt: String
 )
-data class Category(
+
+data class CategoryResponse(
     @SerializedName("creationAt")
     val creationAt: String,
     @SerializedName("id")
