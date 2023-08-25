@@ -5,6 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.webcontrol.platzi.ui.SharedViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.webcontrol.platzi.ui.adapters.ProductsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,86 +42,98 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/d_12"
+            android:layout_marginTop="@dimen/d_8"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle">
-
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/colorSecondary"
+                android:visibility="@{viewModel.loadingVisibility ? View.VISIBLE : View.GONE}"
+                android:layout_gravity="center"/>
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:layout_marginTop="@dimen/d_120"
                 app:layout_behavior="@string/searchbar_scrolling_view_behavior"
                 tools:ignore="PrivateResource">
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProducts"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:orientation="vertical"
-                    android:layout_marginTop="@dimen/d_72">
-
-                    <LinearLayout
-                        android:id="@+id/optionContainer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="end">
-
-                        <TextView
-                            android:id="@+id/textSortLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/white"
-                            android:text="@string/text_order_by_price"
-                            android:textSize="16sp" />
-
-                        <Spinner
-                            android:id="@+id/spinnerSort"
-                            android:layout_width="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:backgroundTint="@color/colorSecondary"
-                            style="@style/mySpinnerItemStyle"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvProducts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/colorSecondary" />
-                </LinearLayout>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/button_add_random_movie"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setAdapter="@{adapter}"
+                    app:submitList="@{viewModel.products}"
+                    tools:listitem="@layout/view_product_item" />
             </androidx.core.widget.NestedScrollView>
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.search.SearchBar
-                    android:id="@+id/search_bar"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/text_search_product_hint" />
+                    android:background="@color/colorPrimary"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.search.SearchBar
+                        android:id="@+id/search_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/text_search_product_hint" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_background_linear"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/d_4"
+                            android:text="@string/text_order_by_price"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/spinnerOptions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorSecondary"
+                            android:padding="@dimen/d_4" />
+                    </LinearLayout>
+                </LinearLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.search.SearchView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/text_search_product_hint"
                 app:layout_anchor="@id/search_bar">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvSearchProducts"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorPrimary" />
+                    android:layout_height="wrap_content"
+                    android:background="#101629"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/d_8"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setAdapter="@{adapter}"
+                    app:submitList="@{viewModel.products}"
+                    tools:listitem="@layout/view_product_item" />
+
             </com.google.android.material.search.SearchView>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
