@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.webcontrol.platzi.domain.model.ProductModel" />
+
+        <variable
+            name="listener"
+            type="com.webcontrol.platzi.ui.adapters.ProductListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_8"
+        android:layout_marginBottom="@dimen/d_12"
+        android:onClick="@{ () -> listener.onProductClicked(product)}"
+        android:padding="@dimen/d_4"
+        app:strokeColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/colorPrimary">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                app:carouselGravity="CENTER"
+                app:imagePlaceholder="@drawable/ic_logo"
+                app:topShadowAlpha="0.3"
+                app:topShadowHeight="32dp"
+                app:bottomShadowAlpha="0.3"
+                android:layout_height="256dp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_bold"
+                android:padding="@dimen/d_12"
+                android:text="@{`$` + product.price}"
+                android:textColor="@color/white"
+                tools:text="Price" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
