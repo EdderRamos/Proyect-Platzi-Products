@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.transition.MaterialFadeThrough
@@ -55,7 +56,9 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun initListeners() {
-
+        binding.btnBuy.setOnClickListener{
+            Toast.makeText(requireContext(), "COMPRADO", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {
