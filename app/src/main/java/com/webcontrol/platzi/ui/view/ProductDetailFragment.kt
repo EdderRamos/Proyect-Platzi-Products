@@ -12,6 +12,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import com.webcontrol.platzi.R
 import com.webcontrol.platzi.databinding.FragmentProductDetailBinding
 import com.webcontrol.platzi.ui.SharedViewModel
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 
 class ProductDetailFragment : Fragment() {
@@ -40,6 +41,17 @@ class ProductDetailFragment : Fragment() {
 
     private fun initUI() {
         initListeners()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.productSelected.observe(viewLifecycleOwner){
+            val images = mutableListOf<CarouselItem>()
+            it.images.forEach {
+                images.add(CarouselItem(it))
+            }
+            binding.carousel.setData(images)
+        }
     }
 
     private fun initListeners() {
