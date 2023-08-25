@@ -25,6 +25,8 @@ class ProductsAdapter(
             listener = productListener
             carousel.setData(images)
             carousel.autoWidthFixing = true
+            carousel.autoPlay = true
+            carousel.autoPlayDelay = 4000
             carousel.carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
                     productListener.onProductClicked(item)

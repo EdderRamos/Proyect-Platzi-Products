@@ -39,6 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:layout_marginTop="@dimen/d_8"
+            app:autoWidthFixing="true"
+            app:autoPlay="true"
             app:bottomShadowAlpha="0.3"
             app:carouselGravity="CENTER"
             app:imagePlaceholder="@drawable/ic_logo"
