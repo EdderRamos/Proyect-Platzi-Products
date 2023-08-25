@@ -44,7 +44,7 @@ data class CategoryEntity(
 
 fun ProductModel.toDataBase(): ProductEntity {
     return ProductEntity(
-        id = id,
+        id = id.toInt(),
         category = CategoryEntity(
             id = category.id,
             creationAt = category.creationAt,
