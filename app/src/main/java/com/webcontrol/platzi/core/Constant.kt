@@ -8,6 +8,7 @@ object Constant {
 
     const val API_MSG_ERROR = "No se logró contactar con el servidor. Comprueba tu conexión a Internet."
     const val MSG_ERROR_INTERN = "Algo salió mal, intentelo de nuevo."
+    const val MSG_ERROR_GET_PRODUCTS = "No se pudo obtener los productos"
 
 
 }
