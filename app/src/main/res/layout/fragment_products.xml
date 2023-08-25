@@ -24,7 +24,7 @@
         android:paddingVertical="@dimen/d_4"
         tools:context=".ui.view.ProductsFragment">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,29 +101,30 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="@dimen/d_4"
                             android:text="@string/text_order_by_price"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spinnerOptions"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorSecondary"
+                            android:backgroundTint="@color/white"
                             android:padding="@dimen/d_4" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.search.SearchView
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/text_search_product_hint"
                 app:layout_anchor="@id/search_bar">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#101629"
+                    android:background="#283F73"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/d_8"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

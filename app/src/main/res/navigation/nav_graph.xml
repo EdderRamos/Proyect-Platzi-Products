@@ -2,21 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_login"
-    app:startDestination="@id/recoveryFragment">
+    android:id="@+id/navGraph"
+    app:startDestination="@id/productFragment">
 
     <fragment
-        android:id="@+id/recoveryFragment"
+        android:id="@+id/productFragment"
         android:name="com.webcontrol.platzi.ui.view.ProductsFragment"
         android:label="fragment_recovery"
         tools:layout="@layout/fragment_products" >
         <action
-            android:id="@+id/action_recoveryFragment_to_recoveryConfirmFragment"
-            app:destination="@id/recoveryConfirmFragment" />
+            android:id="@+id/action_productFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/recoveryConfirmFragment"
+        android:id="@+id/productDetailFragment"
         android:name="com.webcontrol.platzi.ui.view.ProductDetailFragment"
         android:label="fragment_recovery_confirm"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
 </navigation>
