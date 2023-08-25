@@ -1,7 +1,6 @@
 package com.webcontrol.platzi.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import com.webcontrol.platzi.domain.GetProductsUseCase
 import com.webcontrol.platzi.domain.OrderByPriceUseCase
 import com.webcontrol.platzi.domain.SearchProductUseCase
 import com.webcontrol.platzi.domain.model.ProductModel
-import com.webcontrol.platzi.ui.adapters.ProductListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,6 +31,9 @@ class SharedViewModel @Inject constructor(
 
     private val _productSelected = MutableLiveData<ProductModel>()
     val productSelected: LiveData<ProductModel> = _productSelected
+
+    private val _isOrderedByLowerPrice = MutableLiveData<Boolean>()
+    val isOrderedByLowerPrice: LiveData<Boolean> = _isOrderedByLowerPrice
 
     init {
         onCreate()
@@ -67,6 +68,7 @@ class SharedViewModel @Inject constructor(
     fun changeOrderBySelected(ascending: Boolean) {
         viewModelScope.launch {
             _products.value = orderByPriceUseCase(ascending, _products.value)
+            _isOrderedByLowerPrice.value = ascending
         }
     }
 
@@ -74,10 +76,11 @@ class SharedViewModel @Inject constructor(
     fun searchProducts(query: String) {
         viewModelScope.launch {
             _products.value = searchProductUseCase(query)
+            changeOrderBySelected(_isOrderedByLowerPrice.value?: false)
         }
     }
 
-    fun changeProductSelected(product: ProductModel){
+    fun changeProductSelected(product: ProductModel) {
         _productSelected.value = product
     }
 
