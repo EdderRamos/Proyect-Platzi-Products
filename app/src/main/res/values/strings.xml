@@ -18,5 +18,6 @@
     <string name="txt_product_description">Descripción</string>
     <string name="txt_category">Categoria</string>
     <string name="txt_buy_text">Comprar</string>
+    <string name="txt_retry">Reintentar</string>
 
 </resources>

@@ -16,6 +16,8 @@ import com.google.android.material.search.SearchView.TransitionState
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import com.webcontrol.platzi.R
+import com.webcontrol.platzi.core.Constant
+import com.webcontrol.platzi.core.dialog.ErrorDialog
 import com.webcontrol.platzi.databinding.FragmentProductsBinding
 import com.webcontrol.platzi.domain.model.ProductModel
 import com.webcontrol.platzi.ui.SharedViewModel
@@ -106,7 +108,15 @@ class ProductsFragment : Fragment(), ProductListener {
     }
 
     private fun initObservers() {
-
+        viewModel.showMessageError.observe(viewLifecycleOwner) { message ->
+            ErrorDialog.create(Constant.MSG_ERROR_GET_PRODUCTS, description = message,
+                negativeAction = ErrorDialog.Action(getString(R.string.txt_retry)) {
+                    it.dismiss()
+                    viewModel.onCreate()
+                },
+                isDialogCancelable = false
+            ).show(parentFragmentManager, "Error")
+        }
     }
 
     companion object {

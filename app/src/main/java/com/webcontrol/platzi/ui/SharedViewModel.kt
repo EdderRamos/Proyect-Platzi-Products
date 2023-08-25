@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.webcontrol.platzi.core.Constant
 import com.webcontrol.platzi.core.Resource
 import com.webcontrol.platzi.domain.GetProductsUseCase
 import com.webcontrol.platzi.domain.OrderByPriceUseCase
@@ -14,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.function.BinaryOperator
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,16 +37,19 @@ class SharedViewModel @Inject constructor(
     private val _isOrderedByLowerPrice = MutableLiveData<Boolean>()
     val isOrderedByLowerPrice: LiveData<Boolean> = _isOrderedByLowerPrice
 
+    private val _showMessageError = MutableLiveData<String>()
+    val showMessageError: LiveData<String> = _showMessageError
     init {
         onCreate()
     }
 
-    private fun onCreate() {
+    fun onCreate() {
         getProductsUseCase.invoke().onEach { result ->
             when (result) {
                 is Resource.Loading -> showLoading()
                 is Resource.Error -> {
                     hideLoading()
+                    _showMessageError.value = result.message?: Constant.MSG_ERROR_INTERN
                 }
 
                 is Resource.Success -> {
