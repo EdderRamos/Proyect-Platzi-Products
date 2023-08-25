@@ -4,7 +4,7 @@
     <string name="txt_search_product_hint">Buscar Producto</string>
     <string name="text_search_product_hint">Buscar Producto</string>
     <string name="text_order_by_price">Ordenar por:</string>
-
+    <string name="txt_product_detail_title">Detalles del Producto</string>
 
     <!-- FOR SPINNER OPTIONS-->
 
@@ -15,5 +15,8 @@
 
     <!-- PLATZI API-->
     <string name="url_platzi">https://api.escuelajs.co</string>
+    <string name="txt_product_description">Descripción</string>
+    <string name="txt_category">Categoria</string>
+    <string name="txt_buy_text">Comprar</string>
 
 </resources>
