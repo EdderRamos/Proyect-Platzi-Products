@@ -1,6 +1,8 @@
 package com.webcontrol.platzi.ui.view
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,20 +11,28 @@ import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.search.SearchView.TransitionState
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import com.webcontrol.platzi.R
 import com.webcontrol.platzi.databinding.FragmentProductsBinding
+import com.webcontrol.platzi.domain.model.ProductModel
 import com.webcontrol.platzi.ui.SharedViewModel
+import com.webcontrol.platzi.ui.adapters.ProductListener
 import com.webcontrol.platzi.ui.adapters.ProductsAdapter
 
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : Fragment(), ProductListener {
 
     private val viewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentProductsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+        exitTransition = MaterialFadeThrough()
     }
 
     override fun onCreateView(
@@ -32,43 +42,71 @@ class ProductsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        setupSpinnerOptions()
+
         initUI()
         return binding.root
     }
 
     private fun initUI() {
         initObservers()
-        initRecyclerView()
+        initRecyclerViews()
         initListeners()
     }
 
     private fun initListeners() {
-        with(binding){
+        with(binding) {
             spinnerOptions.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     val options: Array<String> = resources.getStringArray(R.array.spinner_options)
-                    when(options[position]){
-                        options[0] -> {
-
-                        }
-                        options[1] -> {
-
-                        }
-                    }
+                    viewModel!!.changeOrderBySelected(position == 0)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
+
+            searchView
+                .editText
+                .setOnEditorActionListener { v, actionId, event ->
+                    searchBar.text = searchView.text
+                    searchView.hide()
+                    false
+                }
+
+            searchView.addTransitionListener { searchView, previousState, newState ->
+                if (newState === TransitionState.HIDDEN) {
+                    viewModel!!.searchProducts(searchBar.text.toString())
+                }
+            }
+
+            searchView.editText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    viewModel!!.searchProducts(p0.toString())
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                }
+
+            })
+
         }
     }
 
-    private fun initRecyclerView() {
-        binding.adapter = ProductsAdapter(listOf(), viewModel)
+    private fun initRecyclerViews() {
+        binding.adapter = ProductsAdapter(listOf(), this)
+        setupSpinnerOptions()
     }
 
     private fun initObservers() {
+
     }
 
     companion object {
@@ -82,5 +120,14 @@ class ProductsFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerOptions.adapter = adapter
+    }
+
+    private fun onNavigateProductDetail() {
+        findNavController().navigate(R.id.action_productFragment_to_productDetailFragment)
+    }
+
+    override fun onProductClicked(product: ProductModel) {
+        viewModel.changeProductSelected(product)
+        onNavigateProductDetail()
     }
 }
